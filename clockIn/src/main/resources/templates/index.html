@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="vue.js"></script>
+    <script src="js/login.js"></script>
+</head>
+<body>
+
+<form action="/loginIn" method="post" id="test">
+    打卡页面
+    <br><br>
+    名字：<input type="text" name="name">
+    <br>
+    密码：<input type="password" name="password">
+    <input type="submit" name="打卡">
+    <br><br>
+    <span th:text="${msg}" style="color:red;"></span>
+</form>
+</body>
+</html>

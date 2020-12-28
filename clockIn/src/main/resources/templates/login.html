@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<!--    <script charset="utf-8" src="vue.js"></script>-->
+    <script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(function(){
+
+            $("#clock").click(function () {
+                var time = $("#time").html();
+                    $.ajax({
+                        url:"/clock",
+                        dataType:"json",
+                        type:"post",
+                        async:"false",
+                        data:{"time":time},
+                        success:function (data) {
+                            if(data.isOk == 'yes'){
+                                $("#time").html(Number(time) + 1);
+                                alert("打卡成功");
+                            }else if(data.isOk == 'no'){
+                                alert("今天已打卡，不需重复打卡");
+                            }else{
+                                alert("记录文件为空，手动恢复内容");
+                            }
+                        },
+                        error:function () {
+                            alert("程序错误!");
+                        }
+                });
+            });
+        })
+    </script>
+
+</head>
+<body>
+<p>坚持的第 <span th:text="${time}" id="time" style="color:red;font-size: 24px"></span>天</p>
+<form>
+    文件默认地址：<input type="text" disabled="disabled" readonly="readonly" size="45" th:value="${place}"></form>
+    <button id="clock">打卡</button>
+</form>
+</body>
+</html>
